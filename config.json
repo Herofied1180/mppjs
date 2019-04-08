@@ -1,0 +1,12 @@
+{
+	"gui": {
+		"enabled": false
+	},
+	"core": {
+		"defaultCommands": false,
+		"showPplCount": true,
+		"welcomePpl": false,
+		"updateChatInConsole": true,
+		"playNotesInConsole": false
+	}
+}
