@@ -1,0 +1,27 @@
+{
+  "name": "mppjs",
+  "version": "1.0.0",
+  "description": "- First create your Node.js folder",
+  "main": "app.js",
+  "directories": {
+    "example": "examples"
+  },
+  "dependencies": {
+    "midi-player-js": "^2.0.5",
+    "ws": "^6.2.1"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Herofied1180/mppjs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Herofied1180/mppjs/issues"
+  },
+  "homepage": "https://github.com/Herofied1180/mppjs#readme"
+}
