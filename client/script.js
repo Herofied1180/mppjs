@@ -16,7 +16,9 @@ const Config = require('../config.json');
 const MidiPlayer = require('midi-player-js');
 const fs = require('fs');
 
-//Initialize the midi player and register event handler
+// TODO - Implement a GUI using Electron
+
+//Initialize the midi player and register event handler (This is a little glitched, but I'll keep it so it doesn't break people's projects)
 const gMidiPlayer = new MidiPlayer.Player((event) => {
 	if (event.name == 'Note on') {
 		press(piano.keys[event.noteName], event.velocity/100);
@@ -26,7 +28,7 @@ const gMidiPlayer = new MidiPlayer.Player((event) => {
 });
 
 //Initialize the client
-const gClient = new Client('ws://www.multiplayerpiano.com/');
+const gClient = new Client('ws://www.multiplayerpiano.com');
 
 // TODO - Implement support for gSoundSelector
 const gSoundSelector = undefined;
@@ -113,22 +115,22 @@ const toggle = {
 			gClient.start();
 		}
 	},
-	playingMidi: () => {
+	/*playingMidi: () => { Another glitched piece of code... :(
 		if (gMidiPlayer.isPlaying) {
 			gMidiPlayer.pause();
 		} else {
 			gMidiPlayer.play();
 		}
-	}
+	}*/
 }
 
-//Add midis to the midi list
-fs.readdir('./midi', (err, files) => {
+//Add midis to the midi list (Bugged)
+/*fs.readdir('@mpp.js/midi', (err, files) => {
 	if (err) throw err;
 
 	files.forEach((file, index) => {
 		console.log(`Found ${file} in midis folder.`);
-		fs.stat(`./midi/${file}`, (error, stat) => {
+		fs.stat(`@mpp.js/midi/${file}`, (error, stat) => {
 			if (error) throw error;
 			if (stat.isFile()) {
 				midis.push(file);
@@ -138,10 +140,10 @@ fs.readdir('./midi', (err, files) => {
 			if (content.split('\n').length < midis) {
 				fs.writeFile('./names.txt', content + midis[midis.length - 1]);
 				console.log(`${file} added names.txt.`);
-			}*/
+			}*
 		});
 	});
-});
+});*/
 
 // (Default Bot Code)
 if (Config.core.showPplCount) {
@@ -154,12 +156,12 @@ if (Config.core.defaultCommands) {
 		if (msg.a == '@info@') {
 			chat.send('MPP.js made by: Tehc(Tehcjs)');
 		} else if (msg.a == '@help@') {
-			chat.send('Core Commands: @info@, @help@, @invite@, @discord@, @git@, @github@, @play@, @pause@, @stop@, @tempo@');
+			chat.send('Core Commands: @info@, @help@, @invite@, @discord@, @git@, @github@');
 		} else if (msg.a == '@invite@' || msg.a == '@discord@') {
 			chat.send(/*'Discord Invite: (none)'*/'There is currently no discord. I\'ll be making one soon.');
 		} else if (msg.a == '@git@' || msg.a == '@github@') {
-			chat.send('MPP.js Github: https://github.com/Herofied1180/mppjs');
-		} else if (msg.a.startsWith('@play@')) {
+			chat.send('MPP.js Github: https://github.com/TehcJS/mppjs');
+		} /*else if (msg.a.startsWith('@play@')) { Also glitched...
 			if (!gMidiPlayer.isPlaying) {
 				let args = msg.a.split(' ');
 				gMidiPlayer.loadFile(`./midi/${args[1]}`);
@@ -182,7 +184,7 @@ if (Config.core.defaultCommands) {
 		} else if (msg.a.startsWith('@unpause@')) {
 			gMidiPlayer.play();
 			chat.send('Song unpaused.');
-		}
+		}*/
 	});
 }
 if (Config.core.welcomePpl) {

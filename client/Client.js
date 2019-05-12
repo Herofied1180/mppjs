@@ -193,6 +193,10 @@ Client.prototype.setChannel = function(id, set) {
 	this.sendArray([{m: "ch", _id: this.desiredChannelId, set: this.desiredChannelSettings}]);
 };
 
+Client.prototype.setName = function(name) {
+	this.sendArray([{m: "userset", set: {name: name}}]);
+};
+
 Client.prototype.offlineChannelSettings = {
 	lobby: true,
 	visible: false,

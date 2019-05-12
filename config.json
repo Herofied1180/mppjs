@@ -4,9 +4,9 @@
 	},
 	"core": {
 		"defaultCommands": false,
-		"showPplCount": true,
+		"showPplCount": false,
 		"welcomePpl": false,
-		"updateChatInConsole": true,
+		"updateChatInConsole": false,
 		"playNotesInConsole": false
 	}
 }

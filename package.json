@@ -1,27 +1,45 @@
 {
-  "name": "mppjs",
-  "version": "1.0.0",
-  "description": "- First create your Node.js folder",
-  "main": "app.js",
+  "name": "mpp.js",
+  "version": "2.1.0",
+  "description": "Node.js library used to create bots for multiplayerpiano.com",
+  "main": "./client/script.js",
   "directories": {
     "example": "examples"
   },
   "dependencies": {
-    "midi-player-js": "^2.0.5",
-    "ws": "^6.2.1"
+    "ws": "^6.2.1",
+    "midi-player-js": "^2.0.5"
   },
   "devDependencies": {},
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "test"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/Herofied1180/mppjs.git"
+    "url": "git+https://github.com/TehcJS/mppjs.git"
   },
-  "author": "",
-  "license": "ISC",
+  "keywords": [
+    "mpp",
+    "mppjs",
+    "mpp.js",
+    "multiplayerpiano",
+    "multiplayer",
+    "piano",
+    "multiplayerpiano.com",
+    "node.js",
+    "nodejs",
+    "library",
+    "bot",
+    "commands",
+    "command",
+    "howto",
+    "how",
+    "to"
+  ],
+  "author": "tehcjs",
+  "license": "MIT",
   "bugs": {
-    "url": "https://github.com/Herofied1180/mppjs/issues"
+    "url": "https://github.com/TehcJS/mppjs/issues"
   },
-  "homepage": "https://github.com/Herofied1180/mppjs#readme"
+  "homepage": "https://github.com/TehcJS/mppjs#readme"
 }
