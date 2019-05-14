@@ -114,6 +114,7 @@ The above code will say "This bot was made using mpp.js 3.0." in chat whenever y
 # New Features:
 
 # - 3.0
+***
 ## - Proxies
 ### Proxies have been added(finally)! :D
 ### Here's an example of a bot using a proxy:
@@ -153,7 +154,7 @@ MPP.setName('MPP Bot');
 // This sends a message to the chat(e.g. "MPP Bot: Testing 123...")
 MPP.client.chat('Testing 123...');
 ```
-
+***
 # - 2.1
 ***
 ## - MPP.client.setName Added
