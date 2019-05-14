@@ -27,64 +27,59 @@ const gMidiPlayer = new MidiPlayer.Player((event) => {
 	}
 });
 
-//Initialize the client
-const gClient = new Client('ws://www.multiplayerpiano.com');
-
-// TODO - Implement support for gSoundSelector
-const gSoundSelector = undefined;
-
-//Chat Object
-const chat = {
-	send: (msg) => {
-		gClient.sendArray([{m: 'a', message: msg}]);
-	},
-	clear: () => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.clear() is not yet implemented.');
-	},
-	blur: () => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.blur() is not yet implemented.');
-	},
-	hide: () => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.hide() is not yet implemented.');
-	},
-	show: () => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.show() is not yet implemented.');
-	},
-	scrollToBottom: () => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.scrollToBottom() is not yet implemented.');
-	},
-	receive: (msg) => {
-		console.warn('Error(Code 100 Not Implemented):\nMPP.chat.receive() is not yet implemented.');
+class MPP {
+	constructor(uri = undefined, proxy = undefined) {
+		this.chat = {
+			send: (msg) => {
+				this.client.sendArray([{m: 'a', message: msg}]);
+			},
+			clear: () => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.clear() is not yet implemented.');
+			},
+			blur: () => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.blur() is not yet implemented.');
+			},
+			hide: () => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.hide() is not yet implemented.');
+			},
+			show: () => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.show() is not yet implemented.');
+			},
+			scrollToBottom: () => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.scrollToBottom() is not yet implemented.');
+			},
+			receive: (msg) => {
+				console.warn('Error(Code 100 Not Implemented):\nMPP.chat.receive() is not yet implemented.');
+			}
+		};
+		// TODO - Implement support for gSoundSelector
+		this.soundSelector = undefined;
+		// TODO - Implement support for gNoteQuota
+		this.noteQuota = undefined;
+		this.sustain = false;
+		this.piano = {
+			keys: require('./keyMap.json')
+		};
+		this.midis = [];
+		this.client = new Client(uri, proxy);
+	};
+	press(id, vol) {
+		this.client.startNote(id, vol);
+	};
+	release(id) {
+		this.client.stopNote(id);
+	};
+	// TODO - Add a piano to the GUI and add support for MPP.press
+	pressSustain() {
+		this.sustain = true;
+	};
+	// TODO - Add a piano to the GUI and add support for MPP.release
+	releaseSustain() {
+		this.sustain = false;
 	}
 }
 
-//Piano Object
-const piano = {
-	keys: require('./keyMap.json')
-}
-
-//Midis Array
-const midis = [];
-
-// TODO - Add a piano to the GUI and add support for MPP.press
-const press = (id, vol) => {
-	gClient.startNote(id, vol);
-}
-
-// TODO - Add a piano to the GUI and add support for MPP.release
-const release = (id) => {
-	gClient.stopNote(id);
-}
-
-const pressSustain = () => {
-	gSustain = true;
-}
-
-const releaseSustain = () => {
-	gSustain = false;
-}
-
-const gNoteQuota = (() => {
+/*const gNoteQuota = (() => {
 	var last_rat = 0;
 	var nqjq = 0;
 	setInterval(() => {
@@ -93,36 +88,9 @@ const gNoteQuota = (() => {
 	return new NoteQuota((points) => {
 		// update UI(There is no ui in Node.js)
 		/*var rat = (points / this.max) * 100;
-		last_rat = rat;*/
+		last_rat = rat;*
 	});
-});
-
-// (Toggle Functions)
-const toggle = {
-	sustain: () => {
-		gSustain = !gSustain;
-	},
-	publicPiano: () => {
-		gClient.desiredChannelSettings.crownsolo = !gClient.desiredChannelSettings.crownsolo;
-	},
-	publicRoom: () => {
-		gClient.desiredChannelSettings.visible = !gClient.desiredChannelSettings.visible;
-	},
-	connection: () => {
-		if (isConnected) {
-			gClient.stop();
-		} else {
-			gClient.start();
-		}
-	},
-	/*playingMidi: () => { Another glitched piece of code... :(
-		if (gMidiPlayer.isPlaying) {
-			gMidiPlayer.pause();
-		} else {
-			gMidiPlayer.play();
-		}
-	}*/
-}
+});*/
 
 //Add midis to the midi list (Bugged)
 /*fs.readdir('@mpp.js/midi', (err, files) => {
@@ -204,7 +172,7 @@ if (Config.core.updateChatInConsole) {
 }
 
 //Export everything
-module.exports.client = gClient;
+/*module.exports.client = gClient;
 module.exports.chat = chat;
 module.exports.piano = piano;
 module.exports.press = press;
@@ -213,7 +181,10 @@ module.exports.pressSustain = pressSustain;
 module.exports.releaseSustain = releaseSustain;
 module.exports.toggle = toggle;
 module.exports.noteQuota = gNoteQuota;
-module.exports.soundSelector = gSoundSelector;
+module.exports.soundSelector = gSoundSelector;*/
 // (mpp.js Midi Player)
-module.exports.midi = gMidiPlayer;
-module.exports.midis = midis;
+/*module.exports.midi = gMidiPlayer;
+module.exports.midis = midis;*/
+
+//Export the MPP class
+module.exports = MPP;
