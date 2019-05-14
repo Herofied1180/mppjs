@@ -15,8 +15,10 @@
 // We have to require the library(of course)
 const mppjs = require('mpp.js');
 
-// MPP's URI
+// MPP's URI(optional)
 var mppuri = 'ws://multiplayerpiano.com:443';
+// The proxy you want to use(optional)
+var proxy = 'https://proxy.example.com';
 // mppuri and proxy are optional.
 const MPP = new mppjs(mppuri, proxy);
 
@@ -74,8 +76,10 @@ const MPP = new mppjs(mppuri, proxy);
 // This is needed for the library
 const mppjs = require('mpp.js');
 
-// MPP's URI
+// MPP's URI(optional)
 var mppuri = 'ws://multiplayerpiano.com:443';
+// The proxy you want to use(optional)
+var proxy = 'https://proxy.example.com';
 
 // This sets up the bot
 //  Note: mppuri and proxy are optional.
@@ -121,8 +125,10 @@ The above code will say "This bot was made using mpp.js 3.0." in chat whenever y
 ```js
 const mppjs = require('mpp.js');
 
-// MPP's URI
+// MPP's URI(optional)
 var mppuri = 'ws://multiplayerpiano.com:443';
+// The proxy you want to use(optional)
+var proxy = 'https://proxy.example.com';
 // mppuri and proxy are optional.
 const MPP = new mppjs(mppuri, 'https://proxy.example.com');
 
@@ -139,8 +145,10 @@ MPP.chat.send('Hello. I'm a proxy bot. Bleep bloop.');
 // We have to require the library(of course)
 const mppjs = require('mpp.js');
 
-// MPP's URI
+// MPP's URI(optional)
 var mppuri = 'ws://multiplayerpiano.com:443';
+// The proxy you want to use(optional)
+var proxy = 'https://proxy.example.com';
 // mppuri and proxy are optional.
 const MPP = new mppjs(mppuri, proxy);
 
