@@ -137,6 +137,8 @@ MPP.client.start();
 
 MPP.chat.send('Hello. I'm a proxy bot. Bleep bloop.');
 ```
+## - Auto-Reconnect
+### If the MPP servers go down or the connection is lost, the bot will try to reconnect to MPP.
 ## - MPP.client.kickban(id, ms) function.
 ### 
 ## - To create a bot, you must require mpp.js then create a new variable and call it MPP. MPP = new mppjs(mppuri, proxy)
