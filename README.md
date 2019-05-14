@@ -48,9 +48,9 @@ MPP.client.on('a', (msg) => {
     // Prints the spoken message to the console
       console.log(`${msg.p.name}: ${msg.a}`);
     
-      // Checks if the participant said "!hello" then sends a message back
+      // Check if the participant said "!hello" then send a message back
       if (msg.a.split(' ')[0].toLowerCase().startsWith('!hello')) {
-          // Sends a message that says: "Hi [Username]!"
+          // Send a message that says: "Hi <Username>!"
           MPP.chat.send(`Hi ${msg.p.name}!`);
       }
 });
