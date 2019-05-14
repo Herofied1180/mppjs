@@ -196,5 +196,5 @@ MPP.client.chat('Testing 123...');
 ## - Improved Code
    ### I have improved the code and syntax. A year ago, I was ```TERRIBLE``` at Node.js. Now, I have improved the code and syntax a lot so it is easier to read and use.
    ### NOTE:
-   #### Some of the features that are availible on the website(like ```js MPP.chat.blur() ```) are not availible on mpp.js 2.0. These features will be implemented in either 3.0 or 3.1. Don't worry, these features will be added soon(1 to 3 months from 2.0's release)
+   #### Some of the features that are availible on the website(like ``` MPP.chat.blur() ```) are not availible on mpp.js 2.0. These features will be implemented in either 3.0 or 3.1. Don't worry, these features will be added soon(1 to 3 months from 2.0's release)
 ***
