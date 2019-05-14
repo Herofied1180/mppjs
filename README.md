@@ -1,4 +1,4 @@
-# mpp.js 2.1
+# mpp.js 3.0
 
 # How to install:
 
@@ -12,23 +12,45 @@
 
 ## Example:
 ```js
-const MPP = require('mpp.js');
+// We have to require the library(of course)
+const mppjs = require('mpp.js');
 
-MPP.chat.send('Hello World!');
+// MPP's URI
+var mppuri = 'ws://multiplayerpiano.com:443';
+// mppuri and proxy are optional.
+const MPP = new mppjs(mppuri, proxy);
 
+// Example:
+// You can set the room to whatever room you want
+MPP.client.setChannel('lobby');
+// This connects to MPP so make sure to not forget this!
+MPP.client.start();
+// You can use this to set your bot's name to anything(e.g. "Awesome Bot")
+MPP.setName('MPP Bot');
+// This sends a message to your room's chat(e.g. "MPP Bot: Testing 123...")
+MPP.client.chat('Testing 123...');
+
+// This event is fired when a user joins or leaves the room
 MPP.client.on('count', (count) => {
   console.log(`${count} people are in the room.`);
 });
 
+// This event is fired when a user sends a message in chat
 MPP.client.on('a', (msg) => {
-  // Prints the spoken message to the console
-  console.log(`${msg.p.name}: ${msg.a}`);
-  
-  // Checks if the participant said "!hello" then sends a message back
-  if (msg.a.split(' ')[0].toLowerCase().startsWith('!hello')) {
-    // Sends a message that says: "Hi [Username]!"
-    MPP.chat.send(`Hi ${msg.p.name}!`);
-  }
+    //Quick msg Explanation:
+      // msg.a is the message that the user sent
+      // msg.p is an object that contains data about the user that sent the message
+      //  msg.p.name is their name
+      //  msg.p.color is the hex representation of their color
+    
+    // Prints the spoken message to the console
+      console.log(`${msg.p.name}: ${msg.a}`);
+    
+      // Checks if the participant said "!hello" then sends a message back
+      if (msg.a.split(' ')[0].toLowerCase().startsWith('!hello')) {
+          // Sends a message that says: "Hi [Username]!"
+          MPP.chat.send(`Hi ${msg.p.name}!`);
+      }
 });
 ```
 
@@ -39,36 +61,98 @@ MPP.client.on('a', (msg) => {
 
 - Insert this code into your index.js:
 ```js
-const MPP = require("mpp.js");
+// This is needed for the library
+const mppjs = require('mpp.js');
+
+// This sets up the bot
+const MPP = new mppjs(mppuri, proxy);
 ```
 
 - Use this example code to help
 
 ```js
-const MPP = require("mpp.js");
+// This is needed for the library
+const mppjs = require('mpp.js');
+
+// MPP's URI
+var mppuri = 'ws://multiplayerpiano.com:443';
+
+// This sets up the bot
+//  Note: mppuri and proxy are optional.
+const MPP = new mppjs(mppuri, proxy);
+
 
 MPP.client.on("a", function(msg){
-  // Prefix
-  var p = "!";
-  var args = msg.a.split(" ");
-  var cmd = args[0].toLowerCase();
-  args = args.slice(1);
-  
-  // Commands
-  if (cmd == p+"test"){
-    MPP.chat.send("mpp.js 2.0 is amazing!");
-  }
+    //Quick msg Explanation:
+        // msg.a is the message that the user sent
+        // msg.p is an object that contains data about the user that sent the message
+        //  msg.p.name is their name
+		//  msg.p.color is the hex representation of their color
+    
+	// Prefix
+	var p = "!";
+	// Gets the arguments by finding the letters after the prefix and command then splitting it by spaces
+	var args = msg.a.split(" ");
+	var cmd = args[0].toLowerCase();
+	args = args.slice(1);
+	
+	// Commands
+	//  This checks if the command that was sent was "<prefix>test"
+	if (cmd == p+"test"){
+		MPP.chat.send("This bot was made using mpp.js 3.0.");
+	}
 }
 ```
-The above code will say "mpp.js 2.0 is amazing!" in chat whenever you run the command !test.
+The above code will say "This bot was made using mpp.js 3.0." in chat whenever you run the command !test.
 
 
 # Complete Docs:
 
-- Coming in 2.2...
+- Coming in 3.0...
 
 
 # New Features:
+
+# - 3.0
+## - Proxies
+### Proxies have been added(finally)! :D
+### Here's an example of a bot using a proxy:
+```js
+const mppjs = require('mpp.js');
+
+// MPP's URI
+var mppuri = 'ws://multiplayerpiano.com:443';
+// mppuri and proxy are optional.
+const MPP = new mppjs(mppuri, 'https://proxy.example.com');
+
+
+MPP.client.start();
+
+MPP.chat.send('Hello. I'm a proxy bot. Bleep bloop.');
+```
+## - MPP.client.kickban(id, ms) function.
+### 
+## - To create a bot, you must require mpp.js then create a new variable and call it MPP. MPP = new mppjs(mppuri, proxy)
+### Example:
+```js
+// We have to require the library(of course)
+const mppjs = require('mpp.js');
+
+// MPP's URI
+var mppuri = 'ws://multiplayerpiano.com:443';
+// mppuri and proxy are optional.
+const MPP = new mppjs(mppuri, proxy);
+
+// Example:
+// You can set the room to whatever room you want
+MPP.client.setChannel('lobby');
+// This connects to MPP so make sure to not forget this!
+MPP.client.start();
+// You can use this to set your bot's name to anything(e.g. "Awesome Bot")
+MPP.setName('MPP Bot');
+// This sends a message to the chat(e.g. "MPP Bot: Testing 123...")
+MPP.client.chat('Testing 123...');
+```
 
 # - 2.1
 ***
@@ -83,7 +167,7 @@ The above code will say "mpp.js 2.0 is amazing!" in chat whenever you run the co
 
 
 ## - Major Bug Fixes
- - ### Fixed a bug that wouldn't allow you to create a bot. It would print this to the console: "Error: Could not find directory E:\\[Directory Name]\midi". I'm so sorry I didn't catch that bug. I'll make sure this doesn't happen again.
+ - ### Fixed a bug that wouldn't allow you to create a bot. It would print this to the console: "Error: Could not find directory E:\\[Directory Name]\midi". I'm so sorry I didn't catch that bug. I'll make sure that doesn't happen again.
 ***
 
 # - 2.0
@@ -111,5 +195,5 @@ The above code will say "mpp.js 2.0 is amazing!" in chat whenever you run the co
 ## - Improved Code
    ### I have improved the code and syntax. A year ago, I was ```TERRIBLE``` at Node.js. Now, I have improved the code and syntax a lot so it is easier to read and use.
    ### NOTE:
-   #### Some of the features that are availible on the website(like ```js MPP.clear() ```) are not availible on mpp.js 2.0. These features will be implemented in either 2.2 or 3.0. Don't worry, these features will be added soon(1 to 3 months from 2.0's release)
+   #### Some of the features that are availible on the website(like ```js MPP.chat.blur() ```) are not availible on mpp.js 2.0. These features will be implemented in either 3.0 or 3.1. Don't worry, these features will be added soon(1 to 3 months from 2.0's release)
 ***
