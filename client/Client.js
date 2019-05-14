@@ -10,6 +10,9 @@ All credit goes to multiplayerpiano.com for creating the Client.js script, and s
 	module.exports = Client;
 	WebSocket = require("ws");
 	EventEmitter = require("events").EventEmitter;
+	// Proxy librariess
+	var HttpsProxyAgent = require("https-proxy-agent");
+	var SocksProxyAgent = require("socks-proxy-agent");
 	// (mpp.js Variable)
 	const colorMap = new Map();
 /*} else {
@@ -26,9 +29,10 @@ function mixin(obj1, obj2) {
 };
 
 
-function Client(uri) {
+function Client(uri, proxy) {
 	EventEmitter.call(this);
-	this.uri = uri;
+	this.uri = uri || "ws://www.multiplayerpiano.com:443";
+	this.proxy = proxy || undefined;
 	this.ws = undefined;
 	this.serverTimeOffset = 0;
 	this.user = undefined;
@@ -83,12 +87,14 @@ Client.prototype.connect = function() {
 	if(typeof module !== "undefined") {
 		// nodejsicle
 		this.ws = new WebSocket(this.uri, {
-			origin: "http://www.multiplayerpiano.com"
+			origin: "http://www.multiplayerpiano.com",
+			agent: this.proxy ? this.proxy.startsWith("socks") ? new SocksProxyAgent(this.proxy) : new HttpsProxyAgent(this.proxy) : undefined
 		});
 	} else {
 		// browseroni
 		this.ws = new WebSocket(this.uri);
 	}
+	this.ws.binaryType = "arraybuffer";
 	var self = this;
 	this.ws.addEventListener("close", function(evt) {
 		self.user = undefined;
@@ -195,6 +201,10 @@ Client.prototype.setChannel = function(id, set) {
 
 Client.prototype.setName = function(name) {
 	this.sendArray([{m: "userset", set: {name: name}}]);
+};
+
+Client.prototype.kickban(id, ms) {
+    MPP.client.sendArray([{m: "kickban", _id: id, ms: ms}]);
 };
 
 Client.prototype.offlineChannelSettings = {
