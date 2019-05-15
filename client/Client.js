@@ -204,7 +204,7 @@ Client.prototype.setName = function(name) {
 	this.sendArray([{m: "userset", set: {name: name}}]);
 };
 
-Client.prototype.kickban(id, ms) {
+Client.prototype.kickban = function(id, ms) {
     MPP.client.sendArray([{m: "kickban", _id: id, ms: ms}]);
 };
 
